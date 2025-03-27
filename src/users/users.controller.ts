@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Prisma } from '@prisma/client';
@@ -23,6 +24,11 @@ export class UsersController {
   @Get()
   findAll() {
     return this.usersService.findAll();
+  }
+  
+  @Get(":id")
+  findOne(@Param("id", ParseIntPipe) userId: number) {
+    return this.usersService.findOne(userId);
   }
 
   @Patch(':id')
